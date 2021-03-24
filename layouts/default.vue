@@ -19,11 +19,12 @@
   font-family: 'Inter', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
     'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 16px;
-  color: var(--text);
+  color: var(--charcoal);
   
   --container-width: 1040px;
   --red: #E50914;
-  --text: #333;
+  --charcoal: #333;
+  --dust: #666;
   --background: #FAFAFC;
   --border: #E2E2E2;
 }

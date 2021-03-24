@@ -11,7 +11,7 @@
     </div>
   </header>
   <main class="container">
-    <section class="songs-list">
+    <section class="songs-list" v-if="filteredSongs.length">
       <article class="song" v-for="song in filteredSongs" :key="song.id">
         <img :src="song.thumbnail_small" :alt="song.name">
         <div class="meta">
@@ -19,6 +19,9 @@
           <p>{{song.artist}}</p>
         </div>
       </article>
+    </section>
+    <section class="no-results" v-else>
+      <p class="light">No results!</p>
     </section>
   </main>
 </div>
@@ -90,23 +93,24 @@ header .brand {
   background-color: white;
   border: solid 1px var(--border);
   border-radius: 2rem;
+  padding-left: 0;
 }
 
 .search input {
-  flex: 1;
-  padding: 1rem;
+  width: 100%;
+  padding: 1rem 0;
   border: none;
   outline: none;
-  margin-right: 2rem;
 }
 
 .search img {
   height: 2rem;
   width: 2rem;
   margin: 0 1rem;
+  opacity: .6;
 }
 
-.songs-list {
+.songs-list, .no-results {
   margin-top: 5rem;
 }
 
@@ -134,5 +138,10 @@ header .brand {
 
 .song p {
   margin: 0;
+}
+
+.light {
+  font-size: .8rem;
+  color: var(--dust);
 }
 </style>
