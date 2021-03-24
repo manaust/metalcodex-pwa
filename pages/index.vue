@@ -12,13 +12,13 @@
   </header>
   <main class="container">
     <section class="songs-list" v-if="filteredSongs.length">
-      <router-link to="/song" class="song" v-for="song in filteredSongs" :key="song.id">
+      <NuxtLink to="/song" class="song" v-for="song in filteredSongs" :key="song.id">
         <img :src="song.thumbnail_small" :alt="song.name">
         <div class="meta">
           <h2>{{song.name}}</h2>
           <p>{{song.artist}}</p>
         </div>
-      </router-link>
+      </NuxtLink>
     </section>
     <section class="no-results" v-else>
       <p class="light">No results!</p>
@@ -37,9 +37,9 @@ export default {
     filteredSongs: function() {
       return this.songs.filter(song => {
         // Compare lowercase and remove spaces
-        const search = this.search.toLowerCase().replace(/\s/g, '')
-        const name = song.name.toLowerCase().replace(/\s/g, '')
-        const artist = song.artist.toLowerCase().replace(/\s/g, '')
+        const search = this.search.toLowerCase().replace(/\s+/g, '')
+        const name = song.name.toLowerCase().replace(/\s+/g, '')
+        const artist = song.artist.toLowerCase().replace(/\s+/g, '')
 
         return name.indexOf(search) !== -1 || artist.indexOf(search) !== -1
       })
