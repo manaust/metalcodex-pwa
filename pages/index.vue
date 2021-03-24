@@ -54,9 +54,6 @@ export default {
       });
     }
   },
-  mounted: function() {
-    this.filteredSongs = this.songs;
-  },
   async fetch() {
     this.songs = await fetch("https://satanica.be/api/songs.json").then(res =>
       res.json()
@@ -150,10 +147,5 @@ a {
 
 .song p {
   margin: 0;
-}
-
-.light {
-  font-size: 0.8rem;
-  color: var(--dust);
 }
 </style>
