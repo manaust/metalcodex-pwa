@@ -12,13 +12,13 @@
   </header>
   <main class="container">
     <section class="songs-list" v-if="filteredSongs.length">
-      <article class="song" v-for="song in filteredSongs" :key="song.id">
+      <router-link to="/song" class="song" v-for="song in filteredSongs" :key="song.id">
         <img :src="song.thumbnail_small" :alt="song.name">
         <div class="meta">
           <h2>{{song.name}}</h2>
           <p>{{song.artist}}</p>
         </div>
-      </article>
+      </router-link>
     </section>
     <section class="no-results" v-else>
       <p class="light">No results!</p>
@@ -31,21 +31,18 @@
 export default {
   data: () => ({
     search: '',
-    songs: [],
-    filteredSongs: []
+    songs: []
   }),
-  watch: {
-    search: function(newSearch) {
-      if (newSearch) {
-        return this.filteredSongs = this.songs.filter(song => {
-          const search = newSearch.toLowerCase()
-          const name = song.name.toLowerCase()
-          const artist = song.artist.toLowerCase()
+  computed: {
+    filteredSongs: function() {
+      return this.songs.filter(song => {
+        // Compare lowercase and remove spaces
+        const search = this.search.toLowerCase().replace(/\s/g, '')
+        const name = song.name.toLowerCase().replace(/\s/g, '')
+        const artist = song.artist.toLowerCase().replace(/\s/g, '')
 
-          return name.indexOf(search) !== -1 || artist.indexOf(search) !== -1
-        })
-      }
-      else this.filteredSongs = this.songs
+        return name.indexOf(search) !== -1 || artist.indexOf(search) !== -1
+      })
     }
   },
   mounted: function() {
@@ -80,6 +77,11 @@ header .brand {
   image-rendering: -webkit-optimize-contrast; /* Webkit (non-standard naming) */
   image-rendering: crisp-edges;
   -ms-interpolation-mode: nearest-neighbor; /* IE (non-standard property) */
+}
+
+a {
+  color: var(--charcoal);
+  text-decoration: none;
 }
 
 .search {
