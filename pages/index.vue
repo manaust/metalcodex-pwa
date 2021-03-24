@@ -17,7 +17,7 @@
     <main class="container">
       <section class="songs-list" v-if="filteredSongs.length">
         <NuxtLink
-          to="/song"
+          :to="'/' + song.id"
           class="song"
           v-for="song in filteredSongs"
           :key="song.id"
@@ -62,7 +62,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 header {
   box-sizing: border-box;
   padding: 5rem 2rem;
