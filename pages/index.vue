@@ -1,59 +1,68 @@
 <template>
-<div>
-  <header>
-    <div class="container">
-      <img class="brand" src="~assets/images/metalcodex.png" alt="Satanica's Metalcodex">
-    </div>
+  <div>
+    <header>
+      <div class="container">
+        <img
+          class="brand"
+          src="~assets/images/metalcodex.png"
+          alt="Satanica's Metalcodex"
+        />
+      </div>
 
-    <div class="container search">
-      <img src="~assets/icons/search.png" alt="Search">
-      <input v-model="search" type="text" placeholder="Search the codex...">
-    </div>
-  </header>
-  <main class="container">
-    <section class="songs-list" v-if="filteredSongs.length">
-      <NuxtLink to="/song" class="song" v-for="song in filteredSongs" :key="song.id">
-        <img :src="song.thumbnail_small" :alt="song.name">
-        <div class="meta">
-          <h2>{{song.name}}</h2>
-          <p>{{song.artist}}</p>
-        </div>
-      </NuxtLink>
-    </section>
-    <section class="no-results" v-else>
-      <p class="light">No results!</p>
-    </section>
-  </main>
-</div>
+      <div class="container search">
+        <img src="~assets/icons/search.png" alt="Search" />
+        <input v-model="search" type="text" placeholder="Search the codex..." />
+      </div>
+    </header>
+    <main class="container">
+      <section class="songs-list" v-if="filteredSongs.length">
+        <NuxtLink
+          to="/song"
+          class="song"
+          v-for="song in filteredSongs"
+          :key="song.id"
+        >
+          <img :src="song.thumbnail_small" :alt="song.name" />
+          <div class="meta">
+            <h2>{{ song.name }}</h2>
+            <p>{{ song.artist }}</p>
+          </div>
+        </NuxtLink>
+      </section>
+      <section class="no-results" v-else>
+        <p class="light">No results!</p>
+      </section>
+    </main>
+  </div>
 </template>
 
 <script>
 export default {
   data: () => ({
-    search: '',
+    search: "",
     songs: []
   }),
   computed: {
     filteredSongs: function() {
       return this.songs.filter(song => {
         // Compare lowercase and remove spaces
-        const search = this.search.toLowerCase().replace(/\s+/g, '')
-        const name = song.name.toLowerCase().replace(/\s+/g, '')
-        const artist = song.artist.toLowerCase().replace(/\s+/g, '')
+        const search = this.search.toLowerCase().replace(/\s+/g, "");
+        const name = song.name.toLowerCase().replace(/\s+/g, "");
+        const artist = song.artist.toLowerCase().replace(/\s+/g, "");
 
-        return name.indexOf(search) !== -1 || artist.indexOf(search) !== -1
-      })
+        return name.indexOf(search) !== -1 || artist.indexOf(search) !== -1;
+      });
     }
   },
   mounted: function() {
-    this.filteredSongs = this.songs
+    this.filteredSongs = this.songs;
   },
   async fetch() {
-    this.songs = await fetch(
-      'https://satanica.be/api/songs.json'
-    ).then(res => res.json())
+    this.songs = await fetch("https://satanica.be/api/songs.json").then(res =>
+      res.json()
+    );
   }
-}
+};
 </script>
 
 <style>
@@ -109,10 +118,11 @@ a {
   height: 2rem;
   width: 2rem;
   margin: 0 1rem;
-  opacity: .6;
+  opacity: 0.6;
 }
 
-.songs-list, .no-results {
+.songs-list,
+.no-results {
   margin-top: 5rem;
 }
 
@@ -132,10 +142,10 @@ a {
 
 .song h2 {
   margin: 0;
-  font-family: 'Inter Bold';
+  font-family: "Inter Bold";
   font-weight: 700;
   font-size: 1.2rem;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 .song p {
@@ -143,7 +153,7 @@ a {
 }
 
 .light {
-  font-size: .8rem;
+  font-size: 0.8rem;
   color: var(--dust);
 }
 </style>
