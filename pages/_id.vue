@@ -15,8 +15,17 @@
         <p class="album">{{ song.album }}</p>
       </div>
     </header>
-    <main class="container lyrics">
-      <p v-html="formattedLyrics" />
+    <main class="container">
+      <a
+        :href="`https://open.spotify.com/track/${id}`"
+        class="spotify"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img src="~assets/icons/spotify.svg" alt="Spotify" />
+        Listen on Spotify
+      </a>
+      <p class="lyrics" v-html="formattedLyrics" />
     </main>
   </div>
   <div v-else>
@@ -28,6 +37,7 @@
 <script>
 export default {
   data: () => ({
+    id: null,
     song: null,
     lyrics: ""
   }),
@@ -38,14 +48,16 @@ export default {
     }
   },
   async fetch() {
-    const id = this.$route.params.id;
+    this.id = this.$route.params.id;
     this.song = await fetch("https://satanica.be/api/songs.json")
       .then(res => res.json())
-      .then(data => data.find(song => song.id === id));
+      .then(data => data.find(song => song.id === this.id));
 
-    this.lyrics = await fetch(`https://satanica.be/api/${id}.txt`).then(res => {
-      return res.text();
-    });
+    this.lyrics = await fetch(`https://satanica.be/api/${this.id}.txt`).then(
+      res => {
+        return res.text();
+      }
+    );
   }
 };
 </script>
@@ -81,7 +93,26 @@ main {
   background-color: white;
 }
 
+.spotify {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-decoration: none;
+  color: var(--red);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: "Inter Bold";
+  margin-bottom: 2rem;
+}
+
+.spotify img {
+  height: 1rem;
+  margin-right: 0.5rem;
+}
+
 .lyrics {
+  margin: 0;
   line-height: 1.5rem;
   white-space: pre;
 }

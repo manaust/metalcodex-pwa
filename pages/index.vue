@@ -65,7 +65,7 @@ export default {
 <style scoped>
 header {
   box-sizing: border-box;
-  padding: 5rem 2rem;
+  padding: 5rem 0;
   background-color: var(--red);
   border-radius: 0 0 2rem 2rem;
   position: relative;

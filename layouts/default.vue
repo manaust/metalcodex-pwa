@@ -30,7 +30,7 @@
   --container-width: 1040px;
   --red: #e50914;
   --charcoal: #333;
-  --dust: #666;
+  --dust: #a6a6a6;
   --background: #fafafc;
   --border: #e2e2e2;
 }
