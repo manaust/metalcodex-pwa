@@ -105,11 +105,9 @@ export default {
       .then(res => res.json())
       .then(data => data.find(song => song.id === this.id));
 
-    this.lyrics = await fetch(`https://satanica.be/api/${this.id}.txt`).then(
-      res => {
-        return res.text();
-      }
-    );
+    this.lyrics = await fetch(
+      `https://satanica.be/api/${this.id}.txt`
+    ).then(res => res.text());
   }
 };
 </script>

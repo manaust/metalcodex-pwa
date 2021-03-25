@@ -171,10 +171,11 @@ a {
 }
 
 main {
-  margin-top: 5rem;
+  margin-top: 4rem;
 }
 
 .tabs {
+  user-select: none;
   display: flex;
   flex-direction: row;
   align-items: center;

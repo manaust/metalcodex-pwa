@@ -27,6 +27,10 @@
   --border: #e2e2e2;
 }
 
+html {
+  overflow-y: scroll;
+}
+
 body {
   background-color: var(--background);
 }
