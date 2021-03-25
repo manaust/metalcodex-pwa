@@ -121,10 +121,6 @@ main {
   white-space: pre-line;
 }
 
-footer {
-  background-color: white;
-}
-
 @media only screen and (max-width: 960px) {
   header .meta,
   main {
