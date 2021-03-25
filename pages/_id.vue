@@ -40,6 +40,11 @@ export default {
     lyrics: null
   }),
   computed: {
+    title: function() {
+      return this.song
+        ? `${this.song.name} | ${this.song.artist}`
+        : "Satanica's Metalcodex";
+    },
     headerStyle: function() {
       if (this.song) {
         return {
@@ -55,6 +60,11 @@ export default {
         };
       }
     }
+  },
+  head: function() {
+    return {
+      title: this.title
+    };
   },
   async fetch() {
     this.id = this.$route.params.id;
