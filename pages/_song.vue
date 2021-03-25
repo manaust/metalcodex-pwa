@@ -30,6 +30,7 @@
           Listen on Spotify
         </a>
         <img
+          title="Song bookmarked!"
           v-if="bookmarked"
           src="~assets/icons/bookmark.svg"
           alt="Bookmark"

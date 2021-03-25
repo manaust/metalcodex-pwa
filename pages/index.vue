@@ -17,24 +17,56 @@
     </header>
 
     <main class="container">
-      <!-- TODO: Tabs -->
-      <section class="songs-list" v-if="filteredSongs.length">
-        <NuxtLink
-          class="song"
-          :to="'/' + song.id"
-          v-for="song in filteredSongs"
-          :key="song.id"
+      <section class="tabs">
+        <div :class="{ active: tab === 'all' }" @click="setTab(`all`)">
+          All songs
+        </div>
+        <div
+          :class="{ active: tab === 'bookmarks' }"
+          @click="setTab(`bookmarks`)"
         >
-          <img :src="song.thumbnail_small" :alt="song.name" />
-          <div class="meta">
-            <h2>{{ song.name }}</h2>
-            <p>{{ song.artist }}</p>
-          </div>
-        </NuxtLink>
+          Bookmarks
+        </div>
       </section>
-      <section class="no-results" v-else>
-        <p class="light">No results!</p>
-      </section>
+      <div class="all" v-if="tab === `all`">
+        <section class="songs-list" v-if="filteredSongs.length">
+          <NuxtLink
+            class="song"
+            :to="'/' + song.id"
+            v-for="song in filteredSongs"
+            :key="song.id"
+          >
+            <img :src="song.thumbnail_small" :alt="song.name" />
+            <div class="meta">
+              <h2>{{ song.name }}</h2>
+              <p>{{ song.artist }}</p>
+            </div>
+          </NuxtLink>
+        </section>
+        <section class="no-results" v-else>
+          <p class="light">No results!</p>
+        </section>
+      </div>
+
+      <div class="bookmarks" v-if="tab === `bookmarks`">
+        <section class="songs-list" v-if="bookmarkedSongs.length">
+          <NuxtLink
+            class="song"
+            :to="'/' + song.id"
+            v-for="song in bookmarkedSongs"
+            :key="song.id"
+          >
+            <img :src="song.thumbnail_small" :alt="song.name" />
+            <div class="meta">
+              <h2>{{ song.name }}</h2>
+              <p>{{ song.artist }}</p>
+            </div>
+          </NuxtLink>
+        </section>
+        <section class="no-results" v-else>
+          <p class="light">No bookmarks yet!</p>
+        </section>
+      </div>
     </main>
   </div>
 </template>
@@ -42,6 +74,7 @@
 <script>
 export default {
   data: () => ({
+    tab: "all",
     search: "",
     songs: []
   }),
@@ -60,6 +93,11 @@ export default {
 
         return name.indexOf(search) !== -1 || artist.indexOf(search) !== -1;
       });
+    }
+  },
+  methods: {
+    setTab: function(tab) {
+      this.tab = tab;
     }
   },
   async fetch() {
@@ -132,9 +170,31 @@ a {
   opacity: 0.6;
 }
 
-.songs-list,
-.no-results {
+main {
   margin-top: 5rem;
+}
+
+.tabs {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.tabs div {
+  cursor: pointer;
+  padding: 0.5rem 0;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+  color: var(--red);
+  font-family: "Inter Bold";
+  font-weight: 700;
+  letter-spacing: 0.025rem;
+  border-bottom: solid 0.25rem transparent;
+}
+
+.tabs .active {
+  border-bottom-color: var(--red);
 }
 
 .song {
