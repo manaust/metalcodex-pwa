@@ -17,6 +17,7 @@
         </div>
       </div>
     </header>
+
     <main class="container">
       <a
         :href="`https://open.spotify.com/track/${id}`"
@@ -123,6 +124,7 @@ main {
   border-radius: 2rem 2rem 0 0;
   padding: 4rem;
   background-color: white;
+  box-shadow: 0 0 4rem 0 rgba(0, 0, 0, 0.1);
 }
 
 .spotify {

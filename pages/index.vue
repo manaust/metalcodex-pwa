@@ -15,11 +15,12 @@
         <input v-model="search" type="text" placeholder="Search the codex..." />
       </div>
     </header>
+
     <main class="container">
       <section class="songs-list" v-if="filteredSongs.length">
         <NuxtLink
-          :to="'/' + song.id"
           class="song"
+          :to="'/' + song.id"
           v-for="song in filteredSongs"
           :key="song.id"
         >
