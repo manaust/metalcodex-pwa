@@ -1,21 +1,20 @@
 <template>
-  <div v-if="song">
-    <header
-      :style="{
-        backgroundImage: `linear-gradient(
-          to bottom,
-          rgba(0,0,0,0.2),
-          rgba(0,0,0,0.4)
-        ), url(${song.thumbnail_large})`
-      }"
-    >
+  <div>
+    <header :style="headerStyle">
       <div class="container">
         <NuxtLink to="/">
           <img class="icon" src="~assets/icons/back.svg" alt="Menu" />
         </NuxtLink>
-        <h2>{{ song.name }}</h2>
-        <p>{{ song.artist }}</p>
-        <p class="album">{{ song.album }}</p>
+        <div class="meta" v-if="song">
+          <h2>{{ song.name }}</h2>
+          <p>{{ song.artist }}</p>
+          <p class="album">{{ song.album }}</p>
+        </div>
+        <div v-else>
+          <div class="skeleton title" />
+          <div class="skeleton" />
+          <div class="skeleton album" />
+        </div>
       </div>
     </header>
     <main class="container">
@@ -28,12 +27,8 @@
         <img src="~assets/icons/spotify.svg" alt="Spotify" />
         Listen on Spotify
       </a>
-      <p class="lyrics" v-html="formattedLyrics" />
+      <p class="lyrics" v-html="lyrics" />
     </main>
-  </div>
-  <div v-else>
-    <!-- TODO: Skeleton -->
-    <p>Loading...</p>
   </div>
 </template>
 
@@ -42,12 +37,23 @@ export default {
   data: () => ({
     id: null,
     song: null,
-    lyrics: ""
+    lyrics: null
   }),
   computed: {
-    formattedLyrics: function() {
-      console.log(this.lyrics);
-      return this.lyrics.replace(/(\\r)*\\n/g, "<br>");
+    headerStyle: function() {
+      if (this.song) {
+        return {
+          backgroundImage: `linear-gradient(
+            to bottom,
+            rgba(0,0,0,0.2),
+            rgba(0,0,0,0.4)
+          ), url(${this.song.thumbnail_large})`
+        };
+      } else {
+        return {
+          backgroundColor: "black"
+        };
+      }
     }
   },
   async fetch() {
@@ -116,7 +122,7 @@ main {
   text-decoration: none;
   color: var(--red);
   text-transform: uppercase;
-  font-size: 0.85rem;
+  font-size: 0.65rem;
   font-weight: 700;
   font-family: "Inter Bold";
   margin-bottom: 2rem;
@@ -131,6 +137,67 @@ main {
   margin: 0;
   line-height: 1.5rem;
   white-space: pre-line;
+}
+
+.skeleton {
+  height: 1rem;
+  width: 10rem;
+  margin-bottom: 0.5rem;
+  background-color: var(--dust);
+  -webkit-animation: flicker 1.5s infinite ease-in-out;
+  -moz-animation: flicker 1.5s infinite ease-in-out;
+  -o-animation: flicker 1.5s infinite ease-in-out;
+  animation: flicker 1.5s infinite ease-in-out;
+}
+
+.skeleton.title {
+  width: 12rem;
+  height: 1.7rem;
+}
+
+@keyframes flicker {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+@-o-keyframes flicker {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+@-moz-keyframes flicker {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+@-webkit-keyframes flicker {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0.6;
+  }
 }
 
 @media only screen and (max-width: 960px) {
