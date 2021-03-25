@@ -1,13 +1,5 @@
 <template>
-  <div class="page">
-    <Nuxt />
-    <footer class="container">
-      <p class="light">
-        2020 © Satanica - All images are property of their respective owners, no
-        copyright infringement intended.
-      </p>
-    </footer>
-  </div>
+  <Nuxt />
 </template>
 
 <style>
@@ -44,24 +36,6 @@ body {
   margin: 0 auto;
   box-sizing: border-box;
   padding: 0 2rem;
-}
-
-.page {
-  width: 100%;
-  min-height: 100vh;
-  position: relative;
-  box-sizing: border-box;
-  padding-bottom: 5rem;
-}
-
-footer.container {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  text-align: center;
-  padding: 2rem;
-  box-sizing: border-box;
 }
 
 .light {

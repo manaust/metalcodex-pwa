@@ -3,10 +3,10 @@
     <header
       :style="{
         backgroundImage: `linear-gradient(
-      to bottom,
-      rgba(0,0,0,0.2),
-      rgba(0,0,0,0.4)
-    ), url(${song.thumbnail_large})`
+          to bottom,
+          rgba(0,0,0,0.2),
+          rgba(0,0,0,0.4)
+        ), url(${song.thumbnail_large})`
       }"
     >
       <div class="container meta">
@@ -64,11 +64,15 @@ export default {
 
 <style scoped>
 header {
-  border-radius: 0;
-  color: white;
-  padding: 6rem 2rem;
   background-size: cover;
   background-position: center;
+}
+
+header .meta {
+  border-radius: 0;
+  color: white;
+  padding: 6rem 4rem;
+  box-sizing: border-box;
 }
 
 header h2 {
@@ -114,6 +118,22 @@ main {
 .lyrics {
   margin: 0;
   line-height: 1.5rem;
-  white-space: pre;
+  white-space: pre-line;
+}
+
+footer {
+  background-color: white;
+}
+
+@media only screen and (max-width: 960px) {
+  header .meta,
+  main {
+    padding: 2.5rem;
+  }
+
+  header {
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+  }
 }
 </style>
