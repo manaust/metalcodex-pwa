@@ -2,6 +2,7 @@
   <div>
     <header>
       <div class="container">
+        <img class="icon" src="~assets/icons/menu.svg" alt="Menu" />
         <img
           class="brand"
           src="~assets/images/metalcodex.png"
@@ -65,7 +66,7 @@ export default {
 <style scoped>
 header {
   box-sizing: border-box;
-  padding: 5rem 0;
+  padding: 1rem 0 5rem 0;
   background-color: var(--red);
   border-radius: 0 0 2rem 2rem;
   position: relative;
@@ -73,6 +74,12 @@ header {
 
 header img {
   user-select: none;
+}
+
+header .icon {
+  display: block;
+  width: 1.5rem;
+  margin-bottom: 3rem;
 }
 
 header .brand {

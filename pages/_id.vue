@@ -9,7 +9,10 @@
         ), url(${song.thumbnail_large})`
       }"
     >
-      <div class="container meta">
+      <div class="container">
+        <NuxtLink to="/">
+          <img class="icon" src="~assets/icons/back.svg" alt="Menu" />
+        </NuxtLink>
         <h2>{{ song.name }}</h2>
         <p>{{ song.artist }}</p>
         <p class="album">{{ song.album }}</p>
@@ -64,14 +67,23 @@ export default {
 
 <style scoped>
 header {
+  padding: 0;
   background-size: cover;
   background-position: center;
 }
 
-header .meta {
+header .icon {
+  user-select: none;
+  display: block;
+  width: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+header .container {
   border-radius: 0;
   color: white;
-  padding: 6rem 4rem;
+  padding-top: 1rem;
+  padding-bottom: 5rem;
   box-sizing: border-box;
 }
 
@@ -122,14 +134,8 @@ main {
 }
 
 @media only screen and (max-width: 960px) {
-  header .meta,
   main {
-    padding: 2.5rem;
-  }
-
-  header {
-    padding-top: 2rem;
-    padding-bottom: 4rem;
+    padding: 2.25rem;
   }
 }
 </style>
