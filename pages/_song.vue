@@ -19,15 +19,30 @@
     </header>
 
     <main class="container">
-      <a
-        :href="`https://open.spotify.com/track/${id}`"
-        class="spotify"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img src="~assets/icons/spotify.svg" alt="Spotify" />
-        Listen on Spotify
-      </a>
+      <div class="actions">
+        <a
+          :href="`https://open.spotify.com/track/${id}`"
+          class="spotify"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="~assets/icons/spotify.svg" alt="Spotify" />
+          Listen on Spotify
+        </a>
+        <img
+          v-if="bookmarked"
+          src="~assets/icons/bookmark.svg"
+          alt="Bookmark"
+          @click="unbookmark()"
+        />
+        <img
+          v-else
+          src="~assets/icons/bookmark_outline.svg"
+          alt="Bookmark"
+          @click="bookmark()"
+        />
+      </div>
+
       <p class="lyrics" v-html="lyrics" />
     </main>
   </div>
@@ -35,10 +50,16 @@
 
 <script>
 export default {
+  head: function() {
+    return {
+      title: this.title
+    };
+  },
   data: () => ({
     id: null,
     song: null,
-    lyrics: null
+    lyrics: null,
+    bookmarked: false
   }),
   computed: {
     title: function() {
@@ -62,13 +83,23 @@ export default {
       }
     }
   },
-  head: function() {
-    return {
-      title: this.title
-    };
+  methods: {
+    bookmark: function() {
+      this.bookmarked = true;
+      localStorage.setItem(this.id, this.id);
+    },
+    unbookmark: function() {
+      this.bookmarked = false;
+      localStorage.removeItem(this.id);
+    }
+  },
+  mounted: function() {
+    if (localStorage.getItem(this.id)) {
+      this.bookmarked = true;
+    }
   },
   async fetch() {
-    this.id = this.$route.params.id;
+    this.id = this.$route.params.song;
     this.song = await fetch("https://satanica.be/api/songs.json")
       .then(res => res.json())
       .then(data => data.find(song => song.id === this.id));
@@ -127,21 +158,30 @@ main {
   box-shadow: 0 0 4rem 0 rgba(0, 0, 0, 0.1);
 }
 
-.spotify {
+.actions {
   display: flex;
   flex-direction: row;
   align-items: center;
-  text-decoration: none;
-  color: var(--red);
-  text-transform: uppercase;
-  font-size: 0.65rem;
-  font-weight: 700;
-  font-family: "Inter Bold";
+  justify-content: space-between;
   margin-bottom: 2rem;
 }
 
-.spotify img {
-  height: 1rem;
+.actions a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: var(--red);
+  text-decoration: none;
+  letter-spacing: 0.05rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-family: "Inter Bold";
+}
+
+.actions img {
+  cursor: pointer;
+  height: 1.5rem;
   margin-right: 0.5rem;
 }
 

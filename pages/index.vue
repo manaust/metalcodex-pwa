@@ -17,6 +17,7 @@
     </header>
 
     <main class="container">
+      <!-- TODO: Tabs -->
       <section class="songs-list" v-if="filteredSongs.length">
         <NuxtLink
           class="song"
@@ -45,6 +46,11 @@ export default {
     songs: []
   }),
   computed: {
+    bookmarkedSongs: function() {
+      return this.songs.filter(song => {
+        return Object.values(localStorage).includes(song.id);
+      });
+    },
     filteredSongs: function() {
       return this.songs.filter(song => {
         // Compare lowercase and remove spaces
