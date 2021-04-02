@@ -13,6 +13,13 @@
       <div class="container search">
         <img src="~assets/icons/search.png" alt="Search" />
         <input v-model="search" type="text" placeholder="Search the codex..." />
+        <img
+          :class="{ shown: search }"
+          class="cancel"
+          src="~assets/icons/cancel.svg"
+          alt="Cancel"
+          @click="cancelSearch()"
+        />
       </div>
     </header>
 
@@ -98,6 +105,9 @@ export default {
   methods: {
     setTab: function(tab) {
       this.tab = tab;
+    },
+    cancelSearch: function() {
+      this.search = "";
     }
   },
   async fetch() {
@@ -154,6 +164,7 @@ a {
   border: solid 1px var(--border);
   border-radius: 2rem;
   padding-left: 0;
+  padding-right: 0;
 }
 
 .search input {
@@ -168,6 +179,16 @@ a {
   width: 2rem;
   margin: 0 1rem;
   opacity: 0.6;
+}
+
+.search .cancel {
+  opacity: 0;
+}
+
+.search .cancel.shown {
+  opacity: 0.3;
+  height: 1.5rem;
+  cursor: pointer;
 }
 
 main {
