@@ -1,80 +1,135 @@
 <template>
-  <div>
-    <header>
-      <div class="container">
-        <img class="icon" src="~assets/icons/menu.svg" alt="Menu" />
-        <img
-          class="brand"
-          src="~assets/images/metalcodex.png"
-          alt="Satanica's Metalcodex"
-        />
-      </div>
-
-      <div class="container search">
-        <img src="~assets/icons/search.png" alt="Search" />
-        <input v-model="search" type="text" placeholder="Search the codex..." />
-        <img
-          :class="{ shown: search }"
-          class="cancel"
-          src="~assets/icons/cancel.svg"
-          alt="Cancel"
-          @click="cancelSearch()"
-        />
-      </div>
-    </header>
-
-    <main class="container">
-      <section class="tabs">
-        <div :class="{ active: tab === 'all' }" @click="setTab(`all`)">
-          All songs
-        </div>
-        <div
-          :class="{ active: tab === 'bookmarks' }"
-          @click="setTab(`bookmarks`)"
+  <div class="row sidebar-container" :class="{ open: menu }">
+    <aside>
+      <div class="branding">
+        <a
+          href="https://satanica.be/"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          Bookmarks
-        </div>
-      </section>
-      <div class="all" v-if="tab === `all`">
-        <section class="songs-list" v-if="filteredSongs.length">
-          <NuxtLink
-            class="song"
-            :to="'/' + song.id"
-            v-for="song in filteredSongs"
-            :key="song.id"
-          >
-            <img :src="song.thumbnail_small" :alt="song.name" />
-            <div class="meta">
-              <h2>{{ song.name }}</h2>
-              <p>{{ song.artist }}</p>
-            </div>
-          </NuxtLink>
-        </section>
-        <section class="no-results" v-else>
-          <p class="light">No results!</p>
-        </section>
+          <img src="~assets/images/logo.png" alt="Satanica's Metalcodex" />
+        </a>
       </div>
 
-      <div class="bookmarks" v-if="tab === `bookmarks`">
-        <section class="songs-list" v-if="bookmarkedSongs.length">
-          <NuxtLink
-            class="song"
-            :to="'/' + song.id"
-            v-for="song in bookmarkedSongs"
-            :key="song.id"
-          >
-            <img :src="song.thumbnail_small" :alt="song.name" />
-            <div class="meta">
-              <h2>{{ song.name }}</h2>
-              <p>{{ song.artist }}</p>
-            </div>
-          </NuxtLink>
-        </section>
-        <section class="no-results" v-else>
-          <p class="light">No bookmarks yet!</p>
-        </section>
+      <div class="socials">
+        <!-- Spotify -->
+        <a
+          title="Spotify"
+          href="https://open.spotify.com/playlist/58SYxmrrBNQXKvzxXVA04X"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="~assets/icons/socials/spotify.svg" alt="Spotify" />
+        </a>
+
+        <!-- Facebook -->
+        <a
+          title="Facebook"
+          href="https://www.facebook.com/club.satanica"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="~assets/icons/socials/facebook.svg" alt="Facebook" />
+        </a>
+
+        <!-- Discord -->
+        <a
+          title="Discord"
+          href="https://discord.gg/YUfdW5FWJq"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="~assets/icons/socials/discord.svg" alt="Discord" />
+        </a>
       </div>
-    </main>
+    </aside>
+
+    <div>
+      <header>
+        <div class="container">
+          <img
+            class="icon"
+            src="~assets/icons/menu.svg"
+            alt="Menu"
+            @click="toggleMenu"
+          />
+          <img
+            class="brand"
+            src="~assets/images/metalcodex.png"
+            alt="Satanica's Metalcodex"
+          />
+        </div>
+
+        <div class="container search">
+          <img src="~assets/icons/search.png" alt="Search" />
+          <input
+            v-model="search"
+            type="text"
+            placeholder="Search the codex..."
+          />
+          <img
+            :class="{ shown: search }"
+            class="cancel"
+            src="~assets/icons/cancel.svg"
+            alt="Cancel"
+            @click="cancelSearch()"
+          />
+        </div>
+      </header>
+
+      <main class="container">
+        <section class="tabs">
+          <div :class="{ active: tab === 'all' }" @click="setTab(`all`)">
+            All songs
+          </div>
+          <div
+            :class="{ active: tab === 'bookmarks' }"
+            @click="setTab(`bookmarks`)"
+          >
+            Bookmarks
+          </div>
+        </section>
+        <div class="all" v-if="tab === `all`">
+          <section class="songs-list" v-if="filteredSongs.length">
+            <NuxtLink
+              class="song"
+              :to="'/' + song.id"
+              v-for="song in filteredSongs"
+              :key="song.id"
+            >
+              <img :src="song.thumbnail_small" :alt="song.name" />
+              <div class="meta">
+                <h2>{{ song.name }}</h2>
+                <p>{{ song.artist }}</p>
+              </div>
+            </NuxtLink>
+          </section>
+          <section class="no-results" v-else>
+            <p class="light">No results!</p>
+          </section>
+        </div>
+
+        <div class="bookmarks" v-if="tab === `bookmarks`">
+          <section class="songs-list" v-if="bookmarkedSongs.length">
+            <NuxtLink
+              class="song"
+              :to="'/' + song.id"
+              v-for="song in bookmarkedSongs"
+              :key="song.id"
+            >
+              <img :src="song.thumbnail_small" :alt="song.name" />
+              <div class="meta">
+                <h2>{{ song.name }}</h2>
+                <p>{{ song.artist }}</p>
+              </div>
+            </NuxtLink>
+          </section>
+          <section class="no-results" v-else>
+            <p class="light">No bookmarks yet!</p>
+          </section>
+        </div>
+      </main>
+    </div>
   </div>
 </template>
 
@@ -83,7 +138,8 @@ export default {
   data: () => ({
     tab: "all",
     search: "",
-    songs: []
+    songs: [],
+    menu: false
   }),
   computed: {
     bookmarkedSongs: function() {
@@ -108,6 +164,9 @@ export default {
     },
     cancelSearch: function() {
       this.search = "";
+    },
+    toggleMenu: function() {
+      this.menu = !this.menu;
     }
   },
   async fetch() {
@@ -135,6 +194,7 @@ header .icon {
   display: block;
   width: 1.5rem;
   margin-bottom: 3rem;
+  cursor: pointer;
 }
 
 header .brand {
@@ -189,6 +249,45 @@ a {
   opacity: 0.3;
   height: 1.5rem;
   cursor: pointer;
+}
+
+.sidebar-container {
+  position: relative;
+  transition: 0.2s;
+}
+
+.sidebar-container.open {
+  transform: translateX(4rem);
+}
+
+aside {
+  background-color: white;
+  height: 100vh;
+  position: absolute;
+  width: 4rem;
+  left: -4rem;
+  border-right: solid 1px var(--border);
+}
+
+aside div {
+  border-bottom: solid 1px var(--border);
+  width: 100%;
+}
+
+aside,
+aside a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+aside a {
+  height: 4rem;
+  justify-content: center;
+}
+
+aside img {
+  height: 2rem;
 }
 
 main {
