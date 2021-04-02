@@ -3,15 +3,7 @@
 </template>
 
 <style>
-@font-face {
-  font-family: "Inter";
-  src: local("Inter"), url(~assets/fonts/Inter-Regular.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Inter Bold";
-  src: local("Inter Bold"), url(~assets/fonts/Inter-Bold.ttf) format("truetype");
-}
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
 
 :root {
   font-family: "Inter", "Source Sans Pro", -apple-system, BlinkMacSystemFont,

@@ -308,7 +308,6 @@ main {
   margin-right: 2rem;
   margin-bottom: 2rem;
   color: var(--red);
-  font-family: "Inter Bold";
   font-weight: 700;
   letter-spacing: 0.025rem;
   border-bottom: solid 0.25rem transparent;
@@ -334,7 +333,6 @@ main {
 
 .song h2 {
   margin: 0;
-  font-family: "Inter Bold";
   font-weight: 700;
   font-size: 1.2rem;
   margin-bottom: 0.5rem;

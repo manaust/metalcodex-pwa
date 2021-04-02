@@ -137,7 +137,6 @@ header .container {
 header h2 {
   margin: 0;
   margin-bottom: 0.5rem;
-  font-family: "Inter Bold";
   font-weight: 700;
 }
 
@@ -175,7 +174,6 @@ main {
   font-size: 0.9rem;
   text-transform: uppercase;
   font-weight: 700;
-  font-family: "Inter Bold";
 }
 
 .actions img {
