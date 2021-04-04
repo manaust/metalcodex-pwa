@@ -13,7 +13,7 @@ export default {
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { hid: "description", name: "description", content: "" }
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/metalcodex.png" }]
+    link: [{ rel: "icon", type: "image/x-icon", href: "/icon.png" }]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -26,11 +26,25 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [],
+  buildModules: ["@nuxtjs/pwa"],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {}
+  build: {},
+
+  pwa: {
+    meta: {
+      theme_color: "#e50914",
+      mobileAppIOS: true,
+      appleStatusBarStyle: "black-translucent"
+    },
+    manifest: {
+      name: "Satanica's Metalcodex",
+      short_name: "Metalcodex",
+      background_color: "#e50914",
+      start_url: "https://metalcodex.satanica.be/"
+    }
+  }
 };
