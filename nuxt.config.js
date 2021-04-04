@@ -38,7 +38,7 @@ export default {
     meta: {
       theme_color: "#e50914",
       mobileAppIOS: true,
-      appleStatusBarStyle: "black-translucent"
+      appleStatusBarStyle: "black"
     },
     manifest: {
       name: "Satanica's Metalcodex",
